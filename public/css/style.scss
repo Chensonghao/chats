@@ -1,0 +1,237 @@
+$font14: 0.736842em;
+@media screen and (min-width: 320px) {
+    body {
+        font-size: 16px;
+    }
+}
+@media screen and (min-width: 360px) {
+    body {
+        font-size: 18px;
+    }
+}
+@media screen and (min-width: 375px) {
+    body {
+        font-size: 19px;
+    }
+}
+body,
+html {
+    height: 100%;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    background: #eee;
+    margin: 0;
+    a {
+        text-decoration: none;
+        outline: none;
+    }
+    button {
+        outline: none;
+        padding: 0;
+        border: none;
+    }
+    input {
+        padding: 3px 8px;
+        outline: none;
+        font-size: $font14;
+        border-radius: 3px;
+        box-sizing: border-box;
+        height: 2.7em;
+        width: 15em;
+        border: 1px solid #ccc;
+        outline: none;
+        -webkit-appearance: none;
+        &:focus {
+            border-color: #66afe9;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+        }
+    }
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+header {
+    width: 100%;
+    height: 2.63157em;
+    background-color: rgb(51, 51, 51);
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    * {
+        display: block;
+    }
+    .user {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    label {
+        width: 50%;
+        margin-left: 1.5em;
+        color: #fff;
+    }
+    a {
+        font-size: 0.85em;
+        margin-left: 0.5em;
+        margin-right: 1.5em;
+        color: #9d9d9d;
+        &:hover {
+            color: #fff;
+        }
+    }
+    img {
+        border-radius: 50%;
+        width: 2.2em;
+    }
+}
+.container {
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 3.5em;
+    box-sizing: border-box;
+    .loginform {
+        margin-top: 3em;
+        margin-left: 10%;
+        button {
+            font-size: $font14;
+            width: 5em;
+            height: 2.5em;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+            border-radius: 3px;
+            &:hover {
+                cursor: pointer;
+                background-color: #2e6da4;
+            }
+        }
+    }
+    .room {
+        padding-bottom: 4em;
+        li {
+            display: flex;
+            font-size: $font14;
+            padding-left: 0.5em;
+            margin-bottom: 1.5em;
+            .systemMsg {
+                color: #999;
+                text-align: center;
+                width: 100%;
+            }
+            img {
+                display: block;
+                vertical-align: top;
+                width: 3em;
+                height: 3em;
+                border-radius: 50%;
+            }
+            .messageContent {
+                margin-left: 0.8em;
+                display: block;
+                flex: 1;
+                .creator {
+                    font-size: 0.8em;
+                    vertical-align: top;
+                    color: #999;
+                }
+                .message {
+                    display: inline-block;
+                    max-width: 80%;
+                    min-width: 2.5em;
+                    line-height: 1.5em;
+                    word-break: break-all;
+                    font-size: 1em;
+                    margin-top: 0.1em;
+                    padding: 8px 6px;
+                    border-radius: 5px;
+                    border: 0.5px solid #ddd;
+                    background-color: #fff;
+                    position: relative;
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        width: 0;
+                        height: 0;
+                        border: 5px solid transparent;
+                        border-left-width: 7px;
+                        border-right-width: 7px;
+                        border-right-color: #ddd;
+                        top: 50%;
+                        left: 0;
+                        margin-top: -10px;
+                        margin-left: -14px;
+                    }
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        width: 0;
+                        height: 0;
+                        border: 5px solid transparent;
+                        border-left-width: 7px;
+                        border-right-width: 7px;
+                        border-right-color: #fff;
+                        top: 50%;
+                        left: 0;
+                        margin-top: -10px;
+                        margin-left: -13px;
+                    }
+                }
+            }
+            &.mine {
+                padding-left: 0;
+                padding-right: 0.5em;
+                justify-content: flex-end;
+                flex-direction: row-reverse;
+                .messageContent {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-left: 0;
+                    margin-right: 0.8em;
+                    .message {
+                        border: none;
+                        background-color: #b2e281;
+                    }
+                    .message:before {
+                        border-right-color: transparent;
+                        border-left-color: #b2e281;
+                        left: 100%;
+                        margin-left: 0;
+                    }
+                    .message:after {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+footer {
+    position: absolute;
+    z-index: 1000;
+    bottom: 0;
+    height: 2.8em;
+    width: 100%;
+    background-color: rgba(205,205,205,0.9);
+    form {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        input {
+            height: 3em;
+            width: 90%;
+        }
+    }
+}

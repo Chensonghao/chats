@@ -1,0 +1,12 @@
+<div class="room">
+    <ul auto-scroll-to-bottom>
+        <li ng-repeat="message in messages track by $index" class="{{me.name===message.creator.name?'mine':''}}">
+            <img ng-src="{{message.creator.avatarUrl}}" alt="头像" ng-show="message.type!=='system'"/>
+            <div class="messageContent" ng-show="message.type!=='system'">
+                <div class="creator" ng-bind="message.creator.name" ng-show="me.name!==message.creator.name"></div>
+                <div class="message" ng-bind="message.message"></div>
+            </div>
+            <div class="systemMsg" ng-show="message.type==='system'" ng-bind="message.message"></div>
+        </li>
+    </ul>
+</div>

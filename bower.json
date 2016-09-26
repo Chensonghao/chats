@@ -1,0 +1,21 @@
+{
+  "name": "chats",
+  "description": "",
+  "main": "",
+  "authors": [
+    "chensonghao"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8"
+  }
+}
