@@ -22,21 +22,33 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 60 * 60 * 1000 //1小时过期
-    }
-    //store: sessionStore
+    },
+    store: sessionStore
 }));
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/components', express.static(path.join(__dirname, 'components')));
+//判断启动模块react还是angular
+var type = 'react';
+var argv = process.argv;
+if (argv && argv.length > 0) {
+    if (/^-angular$/i.test(argv[argv.length - 1])) {
+        type = 'angular';
+    }
+}
 
+app.use(express.static(path.join(__dirname, 'public/' + type)));
+//app.use('/release', express.static(path.join(__dirname, 'release')));
 registerApi(app);
-//webpack config 
+
+//webpack config
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config');
 var compiler = webpack(config);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+}));
 app.use(webpackHotMiddleware(compiler));
 var port = process.env.PORT || 3000;
 var server = app.listen(port, function() {
@@ -82,16 +94,17 @@ io.sockets.on('connection', function(socket) {
         //发送所有客户端
         io.sockets.emit('messageAdded', message);
     });
-    socket.on('removeUser',userLeave);
-    socket.on('disconnect',userLeave);
-    function userLeave(){
-        if(!socket.username){
+    socket.on('removeUser', userLeave);
+    socket.on('disconnect', userLeave);
+
+    function userLeave() {
+        if (!socket.username) {
             return;
         }
         numUsers && --numUsers;
-        socket.broadcast.emit('userLeave',{
-            username:socket.username,
-            numUsers:numUsers
+        socket.broadcast.emit('userLeave', {
+            username: socket.username,
+            numUsers: numUsers
         });
     }
 });

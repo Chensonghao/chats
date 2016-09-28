@@ -1,26 +1,14 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
 
-module.exports = {
-    devtool: 'cheap-module-eval-source-map',
-    entry: [
-        'webpack-hot-middleware/client',
-        './public/js/index',
-        './public/css/style.scss'
-    ],
-    output: {
-        path: path.join(__dirname, '/release'),
-        filename: 'bundle.js',
-        publicPath: '/static/'
-    },
-    plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin()
-    ],
-    module: {
-        loaders: [{
-            test: /\.scss/,
-            loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version"]}!sass-loader?outputStyle=expanded'
-        }]
+function buildConfig() {
+    var type = 'react';
+    var argv = process.argv;
+    if (argv && argv.length > 0) {
+        if (/^-angular$/i.test(argv[argv.length - 1])) {
+            type = 'angular';
+        }
     }
+    var config = require(path.join(__dirname, 'webpack_cfg/' + type + '.config'));
+    return config;
 }
+module.exports = buildConfig();
