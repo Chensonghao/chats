@@ -1,4 +1,6 @@
-angular.module('chatsApp', ['ngRoute'])
+var angular = require('angular');
+require('angular-route');
+var app = angular.module('chatsApp', ['ngRoute'])
     .run(['$rootScope', '$http', '$location','socketService', function($rootScope, $http, $location,socketService) {
         $http({
             url: '/api/validate',
@@ -42,3 +44,4 @@ angular.module('chatsApp', ['ngRoute'])
                 redirectTo: '/login'
             });
     }]);
+module.exports = app;

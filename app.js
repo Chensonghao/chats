@@ -10,6 +10,7 @@ var config = require('./models/config');
 var sessionStore = new mongoStore({
     url: 'mongodb://' + config.host + ':' + config.port + '/' + config.db
 });
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -29,6 +30,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/components', express.static(path.join(__dirname, 'components')));
 
 registerApi(app);
+//webpack config 
+var webpack = require('webpack');
+var webpackDevMiddleware = require('webpack-dev-middleware');
+var webpackHotMiddleware = require('webpack-hot-middleware');
+var config = require('./webpack.config');
+var compiler = webpack(config);
+app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+app.use(webpackHotMiddleware(compiler));
 var port = process.env.PORT || 3000;
 var server = app.listen(port, function() {
     console.log('chats is listening on port ' + port + '!');
@@ -58,7 +67,6 @@ var io = require('socket.io').listen(server);
 //         }
 //     });
 // });
-var messages = [];
 var numUsers = 0;
 io.sockets.on('connection', function(socket) {
     socket.on('addUser', function(username) {
@@ -71,7 +79,6 @@ io.sockets.on('connection', function(socket) {
         });
     });
     socket.on('createMessage', function(message) {
-        //messages.push(message);
         //发送所有客户端
         io.sockets.emit('messageAdded', message);
     });

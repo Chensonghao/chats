@@ -1,5 +1,5 @@
-angular.module('chatsApp')
-    .controller('RoomCtrl', RoomCtrl)
+var app = require('./chats.main');
+app.controller('RoomCtrl', RoomCtrl)
     .controller('MessageCreatorCtrl', MessageCreatorCtrl)
     .controller('LoginCtrl', LoginCtrl);
 

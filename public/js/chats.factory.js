@@ -1,5 +1,5 @@
-angular.module('chatsApp')
-    .factory('chatsRecords', chatsRecords)
+var app = require('./chats.main');
+app.factory('chatsRecords', chatsRecords)
     .factory('socketService', socketService);
 
 socketService.$inject = ['$rootScope'];

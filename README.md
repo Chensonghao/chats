@@ -1,10 +1,10 @@
 # Chats
-> 使用socket.io＋angularjs 搭建的聊天应用
+> 使用socket.io＋angularjs 搭建的聊天应用、使用webpack打包、支持热加载
 
 ### Start
 安装依赖
 ```
-    npm install & bower install
+    npm install
 ```
 运行mongodb
 ```

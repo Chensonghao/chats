@@ -1,5 +1,5 @@
-angular.module('chatsApp')
-.directive('autoScrollToBottom',autoScrollToBottom)
+var app = require('./chats.main');
+app.directive('autoScrollToBottom',autoScrollToBottom)
 .directive('ctrlEnterBreakLine',ctrlEnterBreakLine);
 
 function autoScrollToBottom(){
