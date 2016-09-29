@@ -4,8 +4,7 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
         'webpack-hot-middleware/client',
-        './public/react/index',
-        './public/react/css/style.scss'
+        './public/react/index'
     ],
     output: {
         path: path.join(__dirname, '../release'),
