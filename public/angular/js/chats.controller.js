@@ -27,6 +27,7 @@ function RoomCtrl($scope, socketService, chatsRecords, $location) {
     });
     socketService.on('messageAdded', function(message) {
         $scope.messages.push(message);
+        message.time = new Date() * 1;
         chatsRecords.set($scope.me.email,message);
     });
 }

@@ -3,36 +3,40 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Header from './header';
 import Messages from './messages';
+import Login from './login';
 import Footer from './footer';
-import * as chatsActions from '../actions';
+import {login, logout, getMessages,sendMessage} from '../actions';
 
 class App extends Component {
     constructor(props) {
         super(props);
     }
     render() {
-        const {user,messages, actions} = this.props
+        let {user, messages, login, logout,sendMessage,socket} = this.props;
         return (
-            <div>
-                <Header user={user} logout={actions.logout}/>
-                <Messages user={user} messages = {messages}/>
-                <Footer sendMessage = {actions.sendMessage}/>
+            <div className="reactroot">
+                <Header user={user} logout={logout} socket={socket}/>
+                <div className="container">
+                    {(function() {
+                        if (user) {
+                            return (<Messages user={user} messages={messages}/>);
+                        }
+                        return (<Login login={login} socket={socket}/>);
+                    })()
+}
+                </div>
+                <Footer user={user} sendMessage={sendMessage} socket={socket}/>
             </div>
         );
     }
 }
 App.propTypes = {
-    actions: PropTypes.object.isRequired,
-    messages: PropTypes.array.isRequired
+    messages: PropTypes.array.isRequired,
+    login: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired
 }
 function mapStateToProps(state) {
     return {user: state.user, messages: state.messages}
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(chatsActions, dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, {login, logout, sendMessage})(App);

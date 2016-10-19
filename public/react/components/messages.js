@@ -1,14 +1,23 @@
-import React,{Component,PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import Message from './message'
 
-class Messages extends Component{
-    constructor(props){
+class Messages extends Component {
+    constructor(props) {
         super(props);
     }
-    render(){
+    render() {
+        const {messages,user} = this.props;
         return (
-            <ul>
-            </ul>
+            <div className="room">
+                <ul>
+                    {messages.map(msg =>
+                      <Message
+                        key={msg.time}
+                        message={msg}
+                        userName={user.name}/>
+                    )}
+                </ul>
+            </div>
         );
     }
 }

@@ -1,15 +1,18 @@
+import 'babel-polyfill';
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux'
 import App from './components/app';
 import configStore from './store/configStore';
-import '../chats-style/style.scss';
+import '../common/css/style.scss';
+import { getUser } from './actions';
 
-var store = configStore();
-
+let store = configStore();
+let socket = io.connect('/');
+store.dispatch(getUser(socket));
 render(
     <Provider store={store}>
-        <App/>
+        <App socket={socket}/>
     </Provider>,
     document.getElementById('content')
 );

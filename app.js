@@ -106,6 +106,7 @@ io.sockets.on('connection', function(socket) {
             username: socket.username,
             numUsers: numUsers
         });
+        socket.username = null;
     }
 });
 

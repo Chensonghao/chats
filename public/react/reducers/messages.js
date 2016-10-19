@@ -1,22 +1,18 @@
-const initialState = [{
-    type: 'system',
-    message: 'xxx加入了聊天，当前在线人数11'
-}, {
-    message: 'hello',
-    creator: $scope.me,
-    type: 'message'
-}]
 
-export default function chats(state = initialState, action) {
+
+export default function chats(state=[], action) {
     switch (action.type) {
-        case 'SENDMESSAGE':
+        case 'SEND_MESSAGE':
             return [
                 ...state, {
                     type: action.messageType,
                     creator: action.creator,
-                    message: action.message
+                    message: action.message,
+                    time: action.time
                 }
             ];
+        case 'GET_LOCAL_MESSAGES':
+            return action.messages;
         default:
             return state
     }
