@@ -23,9 +23,11 @@ class App extends Component {
                         }
                         return (<Login login={login} socket={socket}/>);
                     })()
-}
+                    }
                 </div>
-                <Footer user={user} sendMessage={sendMessage} socket={socket}/>
+                {
+                    user?(<Footer user={user} sendMessage={sendMessage} socket={socket}/>):''
+                }
             </div>
         );
     }

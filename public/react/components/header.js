@@ -20,8 +20,10 @@ class Header extends Component{
             return (<div className="user"></div>);
         }
     }
+    shouldComponentUpdate(nextProps, nextState){
+        return !!nextProps.user!==!!this.props.user;
+    }
     render(){
-        console.log('header');
         var logout = this.props.logout;
         return (
             <header>
