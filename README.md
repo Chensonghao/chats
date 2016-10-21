@@ -1,5 +1,11 @@
 # Chats
-> 使用socket.io＋angularjs 搭建的聊天应用、使用webpack打包、支持热加载
+> nodejs + express + mongodb
+
+> socket.io
+
+> 前端支持两种架构：angularjs 或 react-redux + es6
+
+> webpack打包,支持热加载
 
 ### Start
 ##### 安装依赖
@@ -11,7 +17,7 @@
     mongod --dbpath [your DB path]
 ```
 ##### 启动程序
-前端默认使用reactjs
+前端默认使用react-redux
 ```
     npm start
 ```
