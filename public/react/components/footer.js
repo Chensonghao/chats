@@ -20,8 +20,12 @@ class Footer extends Component {
         e.preventDefault();
     }
     componentDidMount() {
+        const user = this.props.user;
         let socket = this.props.socket;
         let sendMessage = this.props.sendMessage;
+        socket.removeListener('userJoin');
+        socket.removeListener('userLeave');
+        socket.removeListener('messageAdded');
         socket.on('userJoin', function(data) {
             sendMessage('system', data.username + '加入了聊天,当前在线人数' + data.numUsers, null);
         });
@@ -29,7 +33,7 @@ class Footer extends Component {
             sendMessage('system', data.username + '退出了聊天,当前在线人数' + data.numUsers, null);
         });
         socket.on('messageAdded', function(message) {
-            sendMessage('message', message.message, message.creator);
+            user && sendMessage('message', message.message, message.creator, user.email);
         });
     }
     shouldComponentUpdate(nextProps, nextState){

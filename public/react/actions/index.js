@@ -84,14 +84,14 @@ export function logout(socket) {
     }
 }
 
-export function sendMessage(messageType, message, creator) {
+export function sendMessage(messageType, message, creator, userEmail) {
     const msg = {
         messageType,
         creator,
         message,
         time: new Date() * 1
     };
-    creator && storage.set(creator.email, msg);
+    creator && storage.set(userEmail, msg);
     msg.type = 'SEND_MESSAGE';
     return msg;
 }
