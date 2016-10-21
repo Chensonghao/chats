@@ -16,7 +16,7 @@ class App extends Component {
         return (
             <div className="reactroot">
                 <Header user={user} logout={logout} socket={socket}/>
-                <div className="container">
+                <div id="container" className="container">
                     {(function() {
                         if (user) {
                             return (<Messages user={user} messages={messages}/>);

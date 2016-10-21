@@ -5,6 +5,11 @@ class Messages extends Component {
     constructor(props) {
         super(props);
     }
+    componentDidUpdate() {
+        //滚动条自动滚到底
+        const container = document.getElementById('container');
+        container.scrollTop = container.scrollHeight;
+    }
     render() {
         const {messages,user} = this.props;
         return (
